@@ -1,3 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+  margin: 0;
+  font-family: 'Roboto';
+
+}
+
+code {
+  font-family: 'Roboto';
+}

@@ -1,12 +1,14 @@
+import BasicNavbar from './components/BasicNavbar';
 import Weather from './components/Weather'
-import Layout from './components/Layout';
+import './App.css'
+import config from './config.json'
+
 
 function App() {
   return (
     <>
-      <Layout>
+      <BasicNavbar title={config.SITE_TITLE}></BasicNavbar>
         <Weather />
-      </Layout>
     </>
   );
 }

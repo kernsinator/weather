@@ -1,10 +1,19 @@
 import axios from "axios"
 import { useState } from "react"
+import { CircularProgress, Box, Button, Paper, Autocomplete, Card, TextField } from '@mui/material'
+import config from '../config.json'
 
 const Weather = () => {
     const [weatherData, setWeatherData] = useState({})
     const [city, setCity] = useState('')
     const [weatherHasLoaded, setWeatherHasLoaded] = useState(false)
+
+    const cities = [
+        'Minneapolis',
+        'Idaho Falls',
+        'Wilmington',
+        'Melbourne',
+    ]
 
     const getWeather = (event) => {
         event.preventDefault()
@@ -25,28 +34,48 @@ const Weather = () => {
 
     if (weatherHasLoaded) {
         return (
-            <div className="text-slate-800 flex-col justify-center">
-                <p>{weatherData.name},{weatherData.sys.state ? weatherData.sys.state : ''} {weatherData.sys.country}</p>
-                <p> Current temp: {weatherData.main.temp}</p>
-                <p> High: {weatherData.main.temp_max}</p>
-                <p> Low: {weatherData.main.temp_min}</p>
-                <p> Feels like: {weatherData.main.feels_like}</p>
-                <p>Looks like: {weatherData.weather[0].description}</p>
+            <>
+                <Box component='div' sx={{
+                    marginTop: '30vh'
+                }}>
+                    <div>
+                        <p>{weatherData.name},{weatherData.sys.state ? weatherData.sys.state : ''} {weatherData.sys.country}</p>
+                        <p> Current temp: {weatherData.main.temp}</p>
+                        <p> High: {weatherData.main.temp_max}</p>
+                        <p> Low: {weatherData.main.temp_min}</p>
+                        <p> Feels like: {weatherData.main.feels_like}</p>
+                        <p>Looks like: {weatherData.weather[0].description}</p>
 
-                <form className="flex-col" onSubmit={getWeather}>
-                    <input className="block" value={city} onChange={handleChange} placeholder="City" />
-                    <button className="bg-red-200 rounded" type="submit">Test</button>
-                </form>
-            </div>
+                        <form onSubmit={getWeather}>
+                            <input value={city} onChange={handleChange} placeholder="City" />
+                            <button type="submit">Test</button>
+                        </form>
+                        {/* <CircularProgress /> */}
+                    </div>
+                </Box>
+
+                    <Paper sx={{ height: '100%' }} elevation={4}>
+
+                        <Button ovariant="contained" color="primary">
+                            Primary Button
+                        </Button>
+                        <Card variant='outlined'>{city}</Card>
+                    </Paper>
+            </>
+
         )
     } else {
         return (
             <>
-                <form onSubmit={getWeather}>
-                    <input value={city} onChange={handleChange} placeholder="City" />
-                    <button className="bg-slate-600" type="submit">Test</button>
-                </form>
-                <p>nope</p>
+                <Box component='div' sx={{
+                    marginTop: '30vh'
+                }}>
+                    <form onSubmit={getWeather}>
+                        <input value={city} onChange={handleChange} placeholder="City" />
+                        <button type="submit">Test</button>
+                    </form>
+                    <p>nope</p>
+                </Box>
             </>
         )
     }
